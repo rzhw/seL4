@@ -37,6 +37,12 @@ void platAddDevices(void)
     insert_dev_p_reg( (p_region_t) {
         BIOS_PADDR_VIDEO_RAM_TEXT_MODE_START, BIOS_PADDR_VIDEO_RAM_TEXT_MODE_START + 0x1000
     } );
+    /* Likewise add the region for TPM MMIO. It's just as hacky, and
+     * we're also just assuming there's a TIS 1.2 compliant TPM, which
+     * may or may not cause weirdness to happen if there isn't one. */
+    insert_dev_p_reg( (p_region_t) {
+        0xFED40000, 0xFED40000 + 0x5000
+    } );
 }
 
 /* ============================== interrupts/IRQs ============================== */
